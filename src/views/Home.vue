@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <v-row align="center" justify="center">
+      <v-img aspect-ratio="1" max-height="250" max-width="250" src="../assets/logo.png" />
+    </v-row>
     <TabsMenu />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import TabsMenu from '@/components/TabsMenu.vue';
-
+import TabsMenu from "@/components/TabsMenu.vue";
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    TabsMenu,
-  },
+    TabsMenu
+  }
 };
 </script>
