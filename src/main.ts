@@ -15,10 +15,12 @@ axios.defaults.withCredentials = true;
 // VUETIFY
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
+import vuetify from './plugins/vuetify';
 Vue.use(Vuetify);
 
 new Vue({
   router,
   store,
-  render: (h: (arg0: any) => any) => h(App),
+  vuetify,
+  render: (h) => h(App),
 }).$mount('#app');
