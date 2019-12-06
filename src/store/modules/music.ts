@@ -1,23 +1,23 @@
-import { Module, VuexModule, Mutation, Action } from "vuex-module-decorators";
+import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
 
-import { IMusic } from "@/models/music";
-import { MusicApi } from "@/api/music";
+import { IMusic } from '@/models/music';
+import { MusicApi } from '@/api/music';
 
 @Module
 export default class MusicModule extends VuexModule {
-    list: IMusic[] = [];
+    public list: IMusic[] = [];
 
     public get musicList(): IMusic[] {
         return this.list;
     }
 
     @Mutation
-    setMusicList(musicList: IMusic[]) {
+    public setMusicList(musicList: IMusic[]) {
         this.list = musicList;
     }
 
-    @Action({ commit: "setMusicList" })
-    async fetchAll() {
+    @Action({ commit: 'setMusicList' })
+    public async fetchAll() {
         const response = await MusicApi.GetAllMusic();
         return response;
     }

@@ -7,17 +7,18 @@ export interface IMusic {
 }
 
 export class MusicDTO implements IMusic {
-    title: string = "";
-    artist: string = "";
-    genre?: string;
-    notes?: string;
-    prompter?: string;
+    public title: string = '';
+    public artist: string = '';
+    public genre?: string;
+    public notes?: string;
+    public prompter?: string;
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class Music extends MusicDTO {
 
     constructor(dto: MusicDTO) {
-        super()
-        Object.assign(this, dto)
+        super();
+        Object.assign(this, dto);
     }
 }
