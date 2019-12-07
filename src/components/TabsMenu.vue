@@ -1,13 +1,12 @@
 <template>
   <v-card color="basil">
-    <v-tabs v-model="tab" background-color="transparent" grow>
-      <v-tab v-for="item in items" :key="item">{{ item }}</v-tab>
+    <v-tabs v-model="tab" background-color="transparent" color="primary" grow>
+      <v-tab v-for="item in items" :key="item.text">{{ item.text }}</v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item">
+      <v-tab-item v-for="item in items" :key="item.text">
         <v-card flat color="basil" height="max">
-          <MusicList v-if="item === 'Nuova canzone'" />
-          <MusicList v-if="item === 'Lista'" />
+          <component :is="item.component"></component>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -21,11 +20,11 @@ export default {
   data() {
     return {
       tab: null,
-      items: ["Nuova canzone", "Lista"]
+      items: [
+        { text: "Nuova canzone", component: MusicList },
+        { text: "Lista", component: MusicList }
+      ]
     };
-  },
-  components: {
-    MusicList
   }
 };
 </script>
