@@ -9,6 +9,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Home from './views/Home.vue';
+import store from './store';
 
 export default Vue.extend({
   name: 'App',
@@ -16,10 +17,9 @@ export default Vue.extend({
   components: {
     Home,
   },
-
-  data: () => ({
-    //
-  }),
+  mounted: () => {
+    store.dispatch('fetchAll');
+  },
 });
 </script>
 
@@ -31,6 +31,19 @@ html,
 body,
 #app {
   background-color: $secondary;
+}
+
+html,
+body {
+  height: 100%;
+}
+#app {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
 }
 
 h1 {

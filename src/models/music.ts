@@ -1,4 +1,5 @@
 export interface IMusic {
+    id?: number;
     title: string;
     artist: string;
     genre?: string;
@@ -7,6 +8,7 @@ export interface IMusic {
 }
 
 export class MusicDTO implements IMusic {
+    public id?: number;
     public title: string = '';
     public artist: string = '';
     public genre?: string;

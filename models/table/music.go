@@ -3,6 +3,8 @@ package table
 import (
 	"time"
 
+	"github.com/IacopoMelani/musicgang/models/dto"
+
 	"github.com/IacopoMelani/Go-Starter-Project/pkg/db"
 
 	record "github.com/IacopoMelani/Go-Starter-Project/pkg/models/table_record"
@@ -26,11 +28,30 @@ type Music struct {
 	tr        *record.TableRecord
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
+	ID        int64     `json:"id"`
 	Title     string    `json:"title" db:"title"`
 	Artist    string    `json:"artist" db:"artist"`
 	Genre     *string   `json:"genre" db:"genre"`
 	Notes     *string   `json:"notes" db:"notes"`
 	Prompter  *string   `json:"prompter" db:"prompter"`
+}
+
+// InsertNewMusic - Si occupa di inserire una nuova canzone
+func InsertNewMusic(m dto.MusicDTO) error {
+
+	newMusic := NewMusic()
+
+	newMusic.Title = m.Title
+	newMusic.Artist = m.Artist
+	newMusic.SetGenre(m.Genre)
+	newMusic.SetNotes(m.Notes)
+	newMusic.SetPrompter(m.Prompter)
+
+	if err := record.Save(newMusic); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // LoadAllMusic - Restituisce tutte le istanze di Music
@@ -48,7 +69,7 @@ func LoadAllMusic() ([]*Music, error) {
 	}
 	defer rows.Close()
 
-	var result []*Music
+	result := []*Music{}
 
 	for rows.Next() {
 
@@ -57,6 +78,8 @@ func LoadAllMusic() ([]*Music, error) {
 		if err := record.LoadFromRow(rows, m); err != nil {
 			return nil, err
 		}
+
+		m.ID = m.tr.GetID()
 
 		result = append(result, m)
 	}
@@ -86,4 +109,19 @@ func (m Music) GetPrimaryKeyName() string {
 // GetTableName - Restituisce il nome della tabella
 func (m Music) GetTableName() string {
 	return MusicsTableName
+}
+
+// SetGenre - Imposta il genere della canzone
+func (m *Music) SetGenre(genre string) {
+	m.Genre = &genre
+}
+
+// SetNotes - Imposta le note per la canzone
+func (m *Music) SetNotes(notes string) {
+	m.Notes = &notes
+}
+
+// SetPrompter - Imposta il genere della canzone
+func (m *Music) SetPrompter(prompter string) {
+	m.Prompter = &prompter
 }
