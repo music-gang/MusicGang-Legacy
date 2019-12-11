@@ -1,5 +1,19 @@
 <template>
   <v-form class="mx-auto px-5 form-new-music" ref="form" v-model="valid" lazy-validation>
+    <v-snackbar
+      v-model="show"
+      :bottom="y === 'bottom'"
+      :color="color"
+      :left="x === 'left'"
+      :multi-line="mode === 'multi-line'"
+      :right="x === 'right'"
+      :timeout="timeout"
+      :top="y === 'top'"
+      :vertical="mode === 'vertical'"
+    >
+      {{ text }}
+      <v-btn dark text @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
     <v-text-field v-model="tempMusic.title" :rules="rules.title" label="Titolo" required></v-text-field>
     <v-text-field v-model="tempMusic.artist" :rules="rules.artist" label="Artista" required></v-text-field>
     <v-text-field v-model="tempMusic.genre" label="Genere (opzionale)"></v-text-field>
@@ -23,7 +37,15 @@ export default {
         artist: [v => !!v || "Artista richiesto"]
       },
       tempMusic: {},
-      valid: false
+      valid: false,
+      color: "success",
+      mode: "multi-line",
+      snackbar: false,
+      text: "Ok!",
+      timeout: 1500,
+      x: null,
+      y: "top",
+      show: false
     };
   },
   methods: {
@@ -33,13 +55,14 @@ export default {
         this.tempMusic.title == undefined ||
         this.tempMusic.artist == undefined
       ) {
-        console.log("foffo 2");
-        console.log(this.tempMusic);
-        console.log(this.$refs.form.validate());
         this.snackbar = true;
         return;
       }
-      store.dispatch("addMusic", this.tempMusic);
+      store.dispatch("addMusic", this.tempMusic).then(() => {
+        this.show = true;
+        this.$refs.form.reset();
+        this.$refs.form.resetValidation();
+      });
     }
   }
 };

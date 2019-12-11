@@ -77,6 +77,8 @@ export class MusicApi {
         const url = 'music/new';
         const response = await MusicApi.musicAxios.post<MusicRequestInterface>(url, music);
 
+        this.updating = false;
+
         if (response.data.status !== 0 || !response.data.success) {
             this.updatingErrMsg = 'Errore durante il recupero della lista delle canzoni';
             return false;

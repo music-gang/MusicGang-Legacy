@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" tile full-width>
+  <v-card class="mx-auto card-overflow" tile full-width>
     <v-list
       :disabled="disabled"
       :dense="dense"
@@ -55,6 +55,11 @@ export default {
 </script>
 
 <style scoped>
+.card-overflow {
+  overflow: auto;
+  height: 64vh;
+}
+
 .centered-item-content {
   text-align: center;
 }

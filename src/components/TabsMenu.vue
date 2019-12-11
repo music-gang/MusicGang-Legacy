@@ -34,8 +34,4 @@ export default {
 
 
 <style scoped>
-.card-overflow {
-  overflow: auto;
-  height: 64vh;
-}
 </style>

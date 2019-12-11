@@ -22,13 +22,13 @@ export default class MusicModule extends VuexModule {
     public async fetchAll() {
         const musicApi = MusicApi.GetInstance();
         const response = await musicApi.GetAllMusic();
-
         if (musicApi.UpdatingErrMsg !== '') {
             return this.list;
         }
 
-        return response;
+        return typeof response === 'undefined' ? this.list : response;
     }
+
     @Action({})
     public async addMusic(data: IMusic) {
         const musicApi = MusicApi.GetInstance();
