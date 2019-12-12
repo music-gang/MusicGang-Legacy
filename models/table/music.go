@@ -47,6 +47,9 @@ func InsertNewMusic(m dto.MusicDTO) error {
 	newMusic.SetNotes(m.Notes)
 	newMusic.SetPrompter(m.Prompter)
 
+	newMusic.CreatedAt = time.Now().UTC()
+	newMusic.UpdatedAt = time.Now().UTC()
+
 	if err := record.Save(newMusic); err != nil {
 		return err
 	}

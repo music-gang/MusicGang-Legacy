@@ -10,7 +10,7 @@ func (c CreateMusicsTable) GetMigrationName() string {
 
 // Down - Definisce la regola di rollback
 func (c CreateMusicsTable) Down() string {
-	return "DROP TABLE IF EXISTS "
+	return "DROP TABLE IF EXISTS musics"
 }
 
 // Up - Definisce la regola di migrate
