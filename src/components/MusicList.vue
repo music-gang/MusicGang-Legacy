@@ -15,12 +15,22 @@
       :rounded="rounded"
     >
       <v-list-item-group color="primary">
-        <v-list-item v-for="item in getMusicList" :key="item.id">
+        <v-list-item
+          v-for="item in getMusicList"
+          :key="item.id"
+          v-show="!item.hidden"
+        >
           <v-list-item-content class="centered-item-content">
-            <v-list-item-title>{{item.title}}</v-list-item-title>
-            <v-list-item-subtitle v-if="twoLine || threeLine">{{item.artist}} - {{item.genre}}</v-list-item-subtitle>
-            <v-list-item-subtitle v-if="twoLine || threeLine">{{item.notes}}</v-list-item-subtitle>
-            <v-list-item-subtitle v-if="twoLine || threeLine">{{item.prompter}}</v-list-item-subtitle>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-subtitle v-if="twoLine || threeLine"
+              >{{ item.artist }} - {{ item.genre }}</v-list-item-subtitle
+            >
+            <v-list-item-subtitle v-if="twoLine || threeLine">{{
+              item.notes
+            }}</v-list-item-subtitle>
+            <v-list-item-subtitle v-if="twoLine || threeLine">{{
+              item.prompter
+            }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -32,6 +42,7 @@
 import store from "../store";
 export default {
   name: "MusicList",
+  props: ["searchString"],
   data: () => ({
     disabled: false,
     dense: false,
@@ -49,6 +60,11 @@ export default {
   computed: {
     getMusicList: () => {
       return store.getters.musicList;
+    }
+  },
+  watch: {
+    searchString: function() {
+      store.dispatch("filterResult", this.searchString);
     }
   }
 };

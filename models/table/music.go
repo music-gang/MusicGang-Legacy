@@ -64,7 +64,7 @@ func LoadAllMusic() ([]*Music, error) {
 
 	db := db.GetConnection()
 
-	query := "SELECT " + record.AllField(m) + " FROM " + m.GetTableName()
+	query := "SELECT " + record.AllField(m) + " FROM " + m.GetTableName() + " ORDER BY " + MusicsColUpdatedAt + " DESC "
 
 	rows, err := db.Query(query)
 	if err != nil {

@@ -5,6 +5,7 @@ export interface IMusic {
     genre?: string;
     notes?: string;
     prompter?: string;
+    hidden?: boolean;
 }
 
 export class MusicDTO implements IMusic {
@@ -14,6 +15,7 @@ export class MusicDTO implements IMusic {
     public genre?: string;
     public notes?: string;
     public prompter?: string;
+    public hidden?: boolean = false;
 }
 
 // tslint:disable-next-line:max-classes-per-file

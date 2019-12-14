@@ -7,19 +7,19 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Home from './views/Home.vue';
-import store from './store';
+import Vue from "vue";
+import Home from "./views/Home.vue";
+import store from "./store";
 
 export default Vue.extend({
-  name: 'App',
+  name: "App",
 
   components: {
-    Home,
+    Home
   },
   mounted: () => {
-    store.dispatch('fetchAll');
-  },
+    store.dispatch("fetchAll");
+  }
 });
 </script>
 
@@ -68,6 +68,11 @@ a {
 }
 
 .v-card > :last-child:not(.v-btn):not(.v-chip) {
+  background-color: $secondary;
+}
+
+.v-toolbar__content,
+.v-toolbar__extension {
   background-color: $secondary;
 }
 </style>
