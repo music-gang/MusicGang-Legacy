@@ -19,6 +19,9 @@ export default Vue.extend({
   },
   mounted: () => {
     store.dispatch("fetchAll");
+    setInterval(() => {
+      store.dispatch("fetchAll");
+    }, 5000);
   }
 });
 </script>
